@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="style.css" type="text/css" rel="stylesheet">
+    <title>Utahrian's MTAw Random Mage Generator</title>
+</head>
+<body>
+    <script src="generator.js"></script>
+    <img src="MageAwakeningLogo.png" alt="Logo" style="width:300px">
+    <br>
+    <button name="start" onclick="mageCreator()">Create your Mage!</button>
+    <br>
+    <label for='path'>Path</label>
+    <select name='path' id = 'path_selection'>
+      <option value = 'random'>Random</option>
+      <option value = 'acanthus'>Acanthus</option>
+      <option value = 'mastigos'>Mastigos</option>
+      <option value = 'moros'>Moros</option>
+      <option value = 'obrimos'>Obrimos</option>
+      <option value = 'thyrsus'>Thyrsus</option>
+    </select>
+    <br>
+    <label for='order'>Order</label>
+    <select name='order' id='order_selection'>
+      <option value='random'>Random</option>
+      <option value='Adamantine Arrow'>Adamantine Arrow</option>
+      <option value='Free Council'>Free Council</option>
+      <option value='Guardians of the Veil'>Guardians of the Veil</option>
+      <option value='Mysterium'>Mysterium</option>
+      <option value='Silver Ladder'>Silver Ladder</option>
+      <option value="Seers of the Throne">Seers of the Throne</option>
+      <option value='Apostate'>Apostate</option>
+    </select>
+    <br>
+    <label for='power'>Power Level</label>
+    <select name='power' id='power'>
+      <option value='starting'>Starting</option>
+      <option value='disciple'>Disciple</option>
+      <option value='adept'>Adept</option>
+      <option value='master'>Master</option>
+    </select>
+    <br>
+    <br>
+    <div class = 'flex-container'>
+    <table class='flex-full'>
+        <tr>
+            <td>Name:</td>
+            <td>Concept:</td>
+            <td>Path: <span id=path></span></td>
+        </tr>
+        <tr>
+            <td>Player:</td>
+            <td>Virtue: <span id=virtue></span></td>
+            <td>Order: <span id='faction'></span></td>
+        </tr>
+        <tr>
+            <td>Chronicle:</td>
+            <td>Vice: <span id=vice></span></td>
+            <td>Cabal:</td>
+        </tr>
+    </table>
+    <br>
+    <table class='flex-full'>
+        <tr>
+            <td>Intelligence: <span id=int></span></td>
+            <td>Strength: <span id=str></span></td>
+            <td>Presence: <span id=pres></span></td>
+        </tr>
+        <tr>
+            <td>Wits: <span id=wits></span></td>
+            <td>Dexterity: <span id=dex></span></td>
+            <td>Manipulation: <span id=manip></span></td>
+        </tr>
+        <tr>
+            <td>Resolve: <span id=res></span></td>
+            <td>Stamina: <span id=sta></span></td>
+            <td>Composure: <span id=comp></span></td>
+        </tr>
+    </table>
+    <br>
+    <table class='flex-full'>
+        <tr>
+            <th>Mental</th>
+            <th>Physical</th>
+            <th>Social</th>
+        </tr>
+        <tr>
+            <td>Academics: <span id=aca></span></td>
+            <td>Athletics: <span id=ath></span></td>
+            <td>Animal Ken: <span id=ani></span></td>
+        </tr>
+        <tr>
+            <td>Computer: <span id=com></span></td>
+            <td>Brawl: <span id=bra></span></td>
+            <td>Empathy: <span id=emp></span></td>
+        </tr>
+        <tr>
+            <td>Crafts: <span id=cra></span></td>
+            <td>Drive: <span id=dri></span></td>
+            <td>Expression: <span id=exp></span></td>
+        </tr>
+        <tr>
+            <td>Investigation: <span id=inv></span></td>
+            <td>Firearms: <span id=fir></span></td>
+            <td>Intimidation: <span id=intim></span></td>
+        </tr>
+        <tr>
+            <td>Medicine: <span id=med></span></td>
+            <td>Larceny: <span id=lar></span></td>
+            <td>Persuasion: <span id=per></span></td>
+        </tr>
+        <tr>
+            <td>Occult: <span id=occ></span></td>
+            <td>Stealth: <span id=ste></span></td>
+            <td>Socialize: <span id=soc></span></td>
+        </tr>
+        <tr>
+            <td>Politics: <span id=pol></span></td>
+            <td>Survival: <span id=sur></span></td>
+            <td>Streetwise: <span id=street></span></td>
+        </tr>
+        <tr>
+            <td>Science: <span id=sci></span></td>
+            <td>Weaponry: <span id=wea></span></td>
+            <td>Subterfuge: <span id=sub></span></td>
+        </tr>
+    </table>
+    <br>
+    <table class="flex-full">
+        <tr>
+            <th colspan="2">Arcana</th>
+        </tr>
+        <tr>
+            <td>Death: <span id=death></span></td>
+            <td>Mind: <span id=mind></span></td>
+            <td>Gnosis: <span id=gnosis></span></td>
+        </tr>
+        <tr>
+            <td>Fate: <span id=fate></span></td>
+            <td>Prime: <span id=prime></span></td>
+            <td>Mana: <span id=mana></span></td>
+        </tr>
+        <tr>
+            <td>Forces: <span id=forces></span></td>
+            <td>Space: <span id=space></span></td>
+            <td>Wisdom: <span id=wisdom></span></td>
+        </tr>
+        <tr>
+            <td>Life: <span id=life></span></td>
+            <td>Spirit: <span id=spirit></span></td>
+            <td>Health: <span id=health></span></td>
+        </tr>
+            <td>Matter: <span id=matter></span></td>
+            <td>Time: <span id=time></span></td>
+            <td>Willpower: <span id=willpower></span></td>
+    </table>
+    <br>
+    <div class = "flex-three">
+      <div class = "flex-left">
+    <table id ="others">
+        <tr>
+            <td>Size: <span id=size></span>  </td>
+        </tr>
+        <tr>
+            <td>Speed: <span id=speed></span></td>
+        </tr>
+        <tr>
+            <td>Defense: <span id=defense></span></td>
+        </tr>
+        <tr>
+            <td>Initiative: <span id=initiative></span></td>
+        </tr>
+    </table>
+    <table id=praxislist class=praxis>
+        </table>
+        </div>
+        <table id=meritlist class=merits>
+        </table>
+        <table id=rotelist class=rotes>
+        </table>
+        </div>       
+</div>
+</body>
+
+</html>

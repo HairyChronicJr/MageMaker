@@ -1,0 +1,84 @@
+
+body {
+    background-color: aqua;
+    text-align: center;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+.flex-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-three {
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+}
+
+.flex-full {
+  margin-left: 20%;
+  justify-self: center;
+  width: 60%;
+  background-color: lightskyblue;
+}
+
+.flex-left {
+  margin-right: 0;
+  margin-left: 20%;
+  padding: 0;
+  width: 20%;
+}
+
+table.flex-full{
+    table-layout: fixed;
+    width: 60%;
+    margin-left: 20%;
+    margin-right: 20%;
+    background-color: lightskyblue;
+}
+
+table.flex-left {
+  table-layout: fixed;
+  background-color: lightskyblue;
+  text-align: left;
+  margin-left: 20%;
+  margin-right: 0;
+  width: 100%;
+  min-width: 100%;
+  padding: 0;
+}
+
+table {
+  table-layout: fixed;
+  background-color: lightskyblue;
+  text-align: left;
+  margin-right: 0;
+}
+
+ul {
+  background-color: lightskyblue;
+  text-align: left;
+}
+
+#meritlist {
+  width: 20%;
+  min-height: 90px;
+  text-align: left;
+  background-color: lightskyblue;
+}
+
+#rotelist {
+  width: 20%;
+  text-align: left;
+  background-color: lightskyblue;
+}
+
+#others, #praxislist {
+  width: 100%;
+}
+
+table.merits th, table.praxis th, table.rotes th {
+  text-align: center;
+}
