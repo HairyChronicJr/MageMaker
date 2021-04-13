@@ -74,17 +74,18 @@ function randomAttributes(level, gnosis) {
         secondary = 4
         tertiary = 3
     } else if (level === 'disciple') {
-        primary = 8 + Math.round(Math.random()*4);
-        secondary = 7 + Math.round(Math.random()*2);
-        tertiary = 6 + Math.round(Math.random()*2); 
+        primary = 8 + Math.floor(Math.random()*4);
+        secondary = 7 + Math.floor(Math.random()*2);
+        tertiary = 6 + Math.floor(Math.random()*2); 
     } else if (level === 'adept') {
-        primary = 9 + Math.round(Math.random()*3);
-        secondary = 7 + Math.round(Math.random()*5);
-        tertiary = 6 + Math.round(Math.random()*3);
+        primary = 9 + Math.floor(Math.random()*3);
+        console.log('Adept primary: ' + primary);
+        secondary = 7 + Math.floor(Math.random()*5);
+        tertiary = 6 + Math.floor(Math.random()*3);
     } else if (level === 'master') {
-        primary = 12 + Math.round(Math.random()*6);
-        secondary = 10 + Math.round(Math.random()*8);
-        tertiary = 8 + Math.round(Math.random()*6);
+        primary = 12 + Math.floor(Math.random()*6);
+        secondary = 10 + Math.floor(Math.random()*8);
+        tertiary = 8 + Math.floor(Math.random()*6);
     }
 let roll = Math.floor(Math.random()*3);
 if (roll === 0) {
