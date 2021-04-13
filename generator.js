@@ -21,33 +21,15 @@ function getPath (pathSelection) {
 }
 
 function getVirtue() {
-    let virtueList = ['Love', 'Humility', 'Honesty', 'Passion', 'Generosity', 'Courage', 'Patience', 'Innocence', 'Ambition']
+    let virtueList = ['Love', 'Humility', 'Honesty', 'Passion', 'Generosity', 'Courage', 'Patience', 'Innocence', 'Ambition'];
     const roll = Math.floor((Math.random() * virtueList.length) + 1);
     return virtueList[roll];
 }
 
 function getVice() {
-    const roll = Math.floor((Math.random() * 9) + 1)
-    switch (roll) {
-        case 1:
-            return 'Anger';
-        case 2:
-            return 'Pride';
-        case 3:
-            return 'Deceit';
-        case 4:
-            return 'Envy';
-        case 5:
-            return 'Avarice';
-        case 6:
-            return 'Fear';
-        case 7:
-            return 'Gluttony';
-        case 8:
-            return 'Lust';
-        case 9:
-            return 'Sloth';
-    }
+    let viceList = ['Anger', 'Pride', 'Deceit', 'Envy', 'Avarice', 'Fear', 'Gluttony', 'Lust', 'Sloth'];
+    const roll = Math.floor((Math.random() * viceList.length) + 1);
+    return viceList[roll];
 }
 
 function getFaction(orderSelection) {
