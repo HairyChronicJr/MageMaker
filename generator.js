@@ -1130,13 +1130,9 @@ function mageCreator() {
     let path = getPath(pathSelection);
     let faction = getFaction(orderSelection);
     let powerLevel = document.getElementById('power').value;
-    //let gnosis = generateGnosis(powerLevel);
-    let gnosis = 1;
+    let gnosis = generateGnosis(powerLevel);
     let attributes = randomAttributes(powerLevel, gnosis);
     let skills = randomSkill(powerLevel, gnosis);
-    /*skills['brawl'] += 2;
-    skills['weaponry'] += 2;
-    skills['athletics'] += 2;*/
     let spheres = arcana(powerLevel, path);
     let others = calculated(attributes, gnosis, skills);
     let merits = randomMerits(gnosis, faction, skills, attributes, spheres, powerLevel);
@@ -1146,7 +1142,6 @@ function mageCreator() {
     let praxisString = spellToString(praxes);
     let [rotesInitial, roteSkillsInitial] = rotes(skills, spheres, powerLevel);
     let roteString = spellToString(rotesInitial, roteSkillsInitial)
-    //console.log(roteString);
     //display character labels
     document.getElementById('path').innerHTML = path.path;
     document.getElementById('virtue').innerHTML = others.virtue;
