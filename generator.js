@@ -2,7 +2,7 @@ function getPath (pathSelection) {
   let path_dict = {'acanthus':1, 'moros':2, 'obrimos':3, 'mastigos':4, 'thyrsus': 5}
   let roll = 0;
   if (pathSelection === 'random') {
-    roll = Math.floor((Math.random() * 5) + 1)
+    roll = Math.floor((Math.random() * 5) + 1);
   } else {
     roll = path_dict[pathSelection]
   } 
@@ -22,13 +22,13 @@ function getPath (pathSelection) {
 
 function getVirtue() {
     let virtueList = ['Love', 'Humility', 'Honesty', 'Passion', 'Generosity', 'Courage', 'Patience', 'Innocence', 'Ambition'];
-    const roll = Math.floor((Math.random() * virtueList.length) + 1);
+    const roll = Math.floor((Math.random() * virtueList.length));
     return virtueList[roll];
 }
 
 function getVice() {
     let viceList = ['Anger', 'Pride', 'Deceit', 'Envy', 'Avarice', 'Fear', 'Gluttony', 'Lust', 'Sloth'];
-    const roll = Math.floor((Math.random() * viceList.length) + 1);
+    const roll = Math.floor((Math.random() * viceList.length));
     return viceList[roll];
 }
 
@@ -36,7 +36,7 @@ function getFaction(orderSelection) {
     const order_list = ['Guardians of the Veil', 'Mysterium', 'Free Council', 'Adamantine Arrow', 'Silver Ladder', 'Seers of the Throne', 'Apostate'];
     let roll = 0;
     if (orderSelection === 'random') {
-      roll = Math.floor((Math.random() * 7));
+      roll = Math.floor((Math.random() * order_list.length));
       return order_list[roll]
     } else {
       return orderSelection
@@ -73,6 +73,7 @@ let roll = Math.floor(Math.random()*3);
 if (roll === 0) {
     let attributeSpread = assignDots(primary, attribMax);
     //mental primary
+    //console.log('Mental Primary');
     attributes.inteligence = attributeSpread.power;
     attributes.wits = attributeSpread.finesse;
     attributes.resolve = attributeSpread.resistance;
@@ -100,14 +101,15 @@ if (roll === 0) {
         attributes.dexterity = attributeSpread.finesse;
         attributes.stamina = attributeSpread.resistance;
     }
-} else if (roll = 1) {
+} else if (roll === 1) {
         //physical primary
+        //console.log('Physical Primary');
         attributeSpread = assignDots(primary, attribMax);
         attributes.strength = attributeSpread.power;
         attributes.dexterity = attributeSpread.finesse;
         attributes.stamina = attributeSpread.resistance;
         roll = Math.floor(Math.random()*2);
-        if (roll = 0) {
+        if (roll === 0) {
             //mental secondary
             attributeSpread = assignDots(secondary, attribMax);
             attributes.inteligence = attributeSpread.power;
@@ -116,7 +118,7 @@ if (roll === 0) {
             //social tertiary
             attributeSpread = assignDots(tertiary, attribMax);
             attributes.presence = attributeSpread.power;
-            attribures.manipulation = attributeSpread.finesse;
+            attributes.manipulation = attributeSpread.finesse;
             attributes.composure = attributeSpread.resistance;
         } else {
             //social secondary
@@ -132,13 +134,15 @@ if (roll === 0) {
         }
 } else {
     //social primary
-    attributeSpread = assignDots(primary);
+    //console.log('Social Primary');
+    attributeSpread = assignDots(primary, attribMax);
     attributes.presence = attributeSpread.power;
-    attribures.manipulation = attributeSpread.finesse;
+    attributes.manipulation = attributeSpread.finesse;
     attributes.composure = attributeSpread.resistance;
     roll = Math.floor(Math.random()*2);
-    if (roll = 0) {
+    if (roll === 0) {
         //mental secondary
+        //console.log('Mental Secondary');
         attributeSpread = assignDots(secondary, attribMax);
         attributes.inteligence = attributeSpread.power;
         attributes.wits = attributeSpread.finesse;
@@ -150,6 +154,7 @@ if (roll === 0) {
         attributes.stamina = attributeSpread.resistance;
     } else {
         //physical secondary
+        //console.log('Physical Secondary');
         attributeSpread = assignDots(secondary, attribMax);
         attributes.strength = attributeSpread.power;
         attributes.dexterity = attributeSpread.finesse;
@@ -198,10 +203,12 @@ function randomSkill(level, gnosis) {
       tertiary = 4 + Math.round(Math.random()*10);
     }
     const skillMax = 5 + Math.max(0, gnosis - 5);
-    let roll = Math.floor(Math.random()*3);
+    //let roll = Math.floor(Math.random()*3);
+    let roll = 0;
     if (roll === 0) {
       let skills = assignSkills(primary, skillMax);
       //mental primary
+      //console.log('Mental skills primary');
       allSkills.academics = skills.skillOne;
       allSkills.computer = skills.skillTwo;
       allSkills.crafts = skills.skillThree;
@@ -213,6 +220,7 @@ function randomSkill(level, gnosis) {
       roll = Math.floor(Math.random()*2);
       if (roll === 0) {
         //physical secondary
+        //console.log('Physical skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.athletics = skills.skillOne;
         allSkills.brawl = skills.skillTwo;
@@ -234,6 +242,7 @@ function randomSkill(level, gnosis) {
         allSkills.subterfuge = skills.skillEight;
       } else {
         //social secondary
+        //console.log('Social skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.animalKen = skills.skillOne;
         allSkills.empathy = skills.skillTwo;
@@ -257,6 +266,7 @@ function randomSkill(level, gnosis) {
     } else if (roll === 1) {
       let skills = assignSkills(primary, skillMax);
       //physical primary
+      //console.log('Physical skills primary');
       allSkills.athletics = skills.skillOne;
       allSkills.brawl = skills.skillTwo;
       allSkills.drive = skills.skillThree;
@@ -268,6 +278,7 @@ function randomSkill(level, gnosis) {
       roll = Math.floor(Math.random()*2);
       if (roll === 0) {
         //social secondary
+        //console.log('Social skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.animalKen = skills.skillOne;
         allSkills.empathy = skills.skillTwo;
@@ -289,6 +300,7 @@ function randomSkill(level, gnosis) {
         allSkills.science = skills.skillEight;
       } else {
         //mental secondary
+        //console.log('Mental skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.academics = skills.skillOne;
         allSkills.computer = skills.skillTwo;
@@ -312,6 +324,7 @@ function randomSkill(level, gnosis) {
     } else if (roll === 2) {
       let skills = assignSkills(primary, skillMax);
       //social primary
+      //console.log('Social skills primary');
       allSkills.animalKen = skills.skillOne;
       allSkills.empathy = skills.skillTwo;
       allSkills.expression = skills.skillThree;
@@ -323,6 +336,7 @@ function randomSkill(level, gnosis) {
       roll = Math.floor(Math.random()*2);
       if (roll === 0) {
         //physical secondary
+        //console.log('Physical skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.athletics = skills.skillOne;
         allSkills.brawl = skills.skillTwo;
@@ -344,6 +358,7 @@ function randomSkill(level, gnosis) {
         allSkills.science = skills.skillEight;
       } else {
         //mental secondary
+        //console.log('Mental skills secondary');
         skills = assignSkills(secondary, skillMax);
         allSkills.academics = skills.skillOne;
         allSkills.computer = skills.skillTwo;
@@ -457,6 +472,7 @@ function calculated (attributes, gnosis, skills){
 function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   let merits = {};
   let meritPoints = 0;
+  let roll = 0;
   if (faction != 'Apostate') {
     merits['High Speech'] = 1;
     merits['Order Status('+faction+')'] = 1;
@@ -470,9 +486,10 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   } else if (level === 'master') {
     meritPoints = 15 + Math.floor(Math.random()*22); 
   }
+  //meritPoints = 3;
   while (meritPoints > 0) {
-  let allMerits = [{name: "Imbued Item", min: 1, max: 10, increment: 1, requirements: (attributes.stamina > 0)},
-  {name:"Enhanced Item", min: 1, max: 10, increment: 1, requirements: (attributes.stamina > 0)},
+  let allMerits = [{name: "Imbued Item", min: 1, max: 10, increment: 1, requirements: true},
+  {name:"Enhanced Item", min: 1, max: 10, increment: 1, requirements: true},
   {name:"Adamant Hand(Brawl)", min:2, max:2, increment: 0, requirements:(merits['Order Status(Adamantine Arrow)'] > 0 && skills.brawl > 2)},
   {name:"Adamant Hand(Weaponry)", min:2, max:2, increment: 0, requirements:(merits['Order Status(Adamantine Arrow)'] > 0 && skills.weaponry > 2)},
   {name:"Adamant Hand(Athletics)", min:2, max:2, increment: 0, requirements:(merits['Order Status(Adamantine Arrow)'] > 0 && skills.athletics > 2)},
@@ -586,8 +603,9 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   {name:"Shiv", min:1, max:2, increment: 1, requirements: (merits['Street Fighting'] > 1 && skills.weaponry > 0)},
   {name:"Street Fighting", min:1, max:5, increment: 1, requirements: (attributes.stamina > 2 && attributes.composure > 2 && skills.brawl > 1 && skills.streetwise > 1)},
   {name:"Unarmed Defense", min:1, max:5, increment: 1, requirements: (attributes.dexterity > 2 && skills.brawl > 1 && merits['Defensive Combat'] > 0)}]
-    roll = Math.floor(Math.random()*allMerits.length);
+  roll = Math.floor(Math.random()*allMerits.length);
     check = allMerits[roll]
+    //alert(check.name);
     if (merits[check.name]) {
       if (meritPoints >= check.increment) {
         if (merits[check.name] < (check.max - check.increment)) {
@@ -647,7 +665,7 @@ let maxString = (Object.keys(mentalSkills).filter(function(x){ return mentalSkil
     newMerits[i] = merits[i];
   } else if (i === 'Vice Ridden') {
     let newVice = getVice();
-    while (newVice = others.vice) {
+    while (newVice === others.vice) {
       newVice = getVice();
     } 
     newVice = others.vice + '/ ' + newVice;
@@ -655,7 +673,7 @@ let maxString = (Object.keys(mentalSkills).filter(function(x){ return mentalSkil
     newMerits[i] = merits[i];
   } else if (i === 'Virtuous') {
     let newVirtue = getVirtue();
-    while (newVirtue = others.virtue) {
+    while (newVirtue === others.virtue) {
       newVirtue = getVirtue();
     } 
     newVirtue = others.virtue + '/ ' + newVirtue;
@@ -1112,9 +1130,13 @@ function mageCreator() {
     let path = getPath(pathSelection);
     let faction = getFaction(orderSelection);
     let powerLevel = document.getElementById('power').value;
-    let gnosis = generateGnosis(powerLevel);
+    //let gnosis = generateGnosis(powerLevel);
+    let gnosis = 1;
     let attributes = randomAttributes(powerLevel, gnosis);
     let skills = randomSkill(powerLevel, gnosis);
+    /*skills['brawl'] += 2;
+    skills['weaponry'] += 2;
+    skills['athletics'] += 2;*/
     let spheres = arcana(powerLevel, path);
     let others = calculated(attributes, gnosis, skills);
     let merits = randomMerits(gnosis, faction, skills, attributes, spheres, powerLevel);
