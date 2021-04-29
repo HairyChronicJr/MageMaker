@@ -61,13 +61,12 @@ function randomAttributes(level, gnosis) {
         tertiary = 6 + Math.floor(Math.random()*2); 
     } else if (level === 'adept') {
         primary = 9 + Math.floor(Math.random()*3);
-        console.log('Adept primary: ' + primary);
         secondary = 7 + Math.floor(Math.random()*5);
         tertiary = 6 + Math.floor(Math.random()*3);
     } else if (level === 'master') {
-        primary = 12 + Math.floor(Math.random()*6);
-        secondary = 10 + Math.floor(Math.random()*8);
-        tertiary = 8 + Math.floor(Math.random()*6);
+        primary = 11 + Math.floor(Math.random()*6);
+        secondary = 9 + Math.floor(Math.random()*8);
+        tertiary = 7 + Math.floor(Math.random()*6);
     }
 let roll = Math.floor(Math.random()*3);
 if (roll === 0) {
@@ -170,7 +169,7 @@ let attributeKeys = Object.keys(attributes);
 let points = 1;
 while (points > 0) {
     roll = Math.floor(Math.random()*3);
-    if (attributes[attributeKeys[roll*3]] < 5) {
+    if (attributes[attributeKeys[roll*3]] < attribMax) {
         attributes[attributeKeys[roll*3]] += 1;
         points -= 1
     }
@@ -185,26 +184,28 @@ function randomSkill(level, gnosis) {
           survival: 0, weaponry: 0, animalKen: 0, empathy: 0, 
           expression: 0, intimidation: 0, persuasion: 0, socialize: 0, 
           streetwise: 0, subterfuge: 0};
-    if (level === 'starting') {
+    let primary = 11;
+    let secondary = 7;
+    let tertiary = 4;
+    /*if (level === 'starting') {
       primary = 11;
       secondary = 7;
       tertiary = 4;
     } else if (level === 'disciple') {
-      primary = 11 + Math.round(Math.random()*11);
-      secondary = 7 + Math.round(Math.random()*7);
-      tertiary = 4 + Math.round(Math.random()*4);
+      primary = 11 + Math.floor(Math.random()*11);
+      secondary = 7 + Math.floor(Math.random()*7);
+      tertiary = 4 + Math.floor(Math.random()*4);
     } else if (level === 'adept') {
-      primary = 10 + Math.round(Math.random()*13);
-      secondary = 8 + Math.round(Math.random()*10);
-      tertiary = 4 + Math.round(Math.random()*10);
+      primary = 10 + Math.floor(Math.random()*13);
+      secondary = 8 + Math.floor(Math.random()*10);
+      tertiary = 4 + Math.floor(Math.random()*10);
     } else if (level === 'master') {
-      primary = 10 + Math.round(Math.random()*17);
-      secondary = 9 + Math.round(Math.random()*10);
-      tertiary = 4 + Math.round(Math.random()*10);
-    }
+      primary = 10 + Math.floor(Math.random()*17);
+      secondary = 9 + Math.floor(Math.random()*10);
+      tertiary = 4 + Math.floor(Math.random()*10);
+    }*/
     const skillMax = 5 + Math.max(0, gnosis - 5);
-    //let roll = Math.floor(Math.random()*3);
-    let roll = 0;
+    let roll = Math.floor(Math.random()*3);
     if (roll === 0) {
       let skills = assignSkills(primary, skillMax);
       //mental primary
@@ -1121,6 +1122,46 @@ function getRoteSkill (spell, skills) {
   }
 }
 
+function addSkills (skills, gnosis, level) {
+  let skillsList = [];
+  let zeroSkills = [];
+  let skillPoints = 0;
+  let roll = 0;
+  for (const skill of Object.keys(skills)) {
+    if (skills[skill] > 0) {
+      skillsList.push(skill)
+    } else {
+      zeroSkills.push(skill)
+    }
+  }
+  const skillMax = 5 + Math.max(0, gnosis - 5);
+  if (level === 'starting') {
+      skillPoints = 0;
+    } else if (level === 'disciple') {
+      skillPoints = Math.floor(Math.random()*20);
+    } else if (level === 'adept') {
+      skillPoints = 6 + Math.floor(Math.random()*30);
+    } else if (level === 'master') {
+      skillPoints = 7 + Math.floor(Math.random()*35);
+    }
+  while (skillPoints > 0) {
+    roll = Math.floor(Math.random() * skillsList.length+1);
+    if (roll < skillsList.length) {
+      checkSkill = skillsList[roll];
+      if (skills[checkSkill] < skillMax) {
+        skills[checkSkill] += 1;
+        skillPoints -= 1;
+      }
+    } else {
+      roll = Math.floor(Math.random() * zeroSkills.length);
+      newSkill = zeroSkills[roll];
+      zeroSkills.splice(roll, 1);
+      skillsList[newSkill] = 1;
+      skillPoints -=1;
+    }
+  }
+}
+
 function mageCreator() {
     let meritList = document.querySelector(".merits");
     let praxisList = document.querySelector(".praxis");
@@ -1133,6 +1174,7 @@ function mageCreator() {
     let gnosis = generateGnosis(powerLevel);
     let attributes = randomAttributes(powerLevel, gnosis);
     let skills = randomSkill(powerLevel, gnosis);
+    addSkills(skills, gnosis, powerLevel);
     let spheres = arcana(powerLevel, path);
     let others = calculated(attributes, gnosis, skills);
     let merits = randomMerits(gnosis, faction, skills, attributes, spheres, powerLevel);
@@ -1142,6 +1184,7 @@ function mageCreator() {
     let praxisString = spellToString(praxes);
     let [rotesInitial, roteSkillsInitial] = rotes(skills, spheres, powerLevel);
     let roteString = spellToString(rotesInitial, roteSkillsInitial)
+    addSkills(skills, gnosis, powerLevel);
     //display character labels
     document.getElementById('path').innerHTML = path.path;
     document.getElementById('virtue').innerHTML = others.virtue;
