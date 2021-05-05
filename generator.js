@@ -427,16 +427,7 @@ function generateGnosis(level) {
 function arcana(powerLevel, path) {
     let arcanum = {'death': 0, 'fate':0, 'forces':0, 'life':0,
     'matter':0, 'mind':0, 'prime':0, 'space':0, 'spirit':0, 'time':0};
-    let dots = 0;
-    if (powerLevel ==='starting') {
-      dots = 6;
-    } else if (powerLevel === 'disciple') {
-      dots = 6 + Math.round(Math.random()*4);
-    } else if (powerLevel === 'adept') {
-      dots = 8 + Math.round(Math.random()*8);
-    } else if (powerLevel === 'master') {
-      dots = 10 + Math.round(Math.random()*7);
-    }
+    let dots = 6;
     for (sphere in arcanum) {
       if (sphere === path.ruling[0] || sphere === path.ruling[1]) {
         arcanum[sphere] += 1;
@@ -1162,6 +1153,76 @@ function addSkills (skills, gnosis, level) {
   }
 }
 
+function addArcana (gnosis, powerLevel, spheres) {
+  let highSphere = 0;
+  let otherSphere = 0;
+  let sphereList = [];
+  let zeroSpheres = [];
+  for (const sphere of Object.keys(spheres)) {
+    if (spheres[sphere] > 0) {
+      sphereList.push(sphere)
+    } else {
+      zeroSpheres.push(sphere)
+    }
+  };
+  switch (gnosis) {
+    case 1:
+      highSphere = 3;
+      otherSphere = 2;
+      break;
+    case 2:
+      highSphere = 3;
+      otherSphere = 3;
+      break;
+    case 3:
+      highSphere = 4;
+      otherSphere = 3;
+      break;
+    case 4:
+      highSphere = 4;
+      otherSphere = 4;
+      break;
+    case 5:
+      highSphere = 5;
+      otherSphere = 4;
+      break;
+    default:
+      highSphere = 5;
+      otherSphere = 5;
+  }
+  let dots = 0;
+  if (powerLevel ==='starting') {
+      dots = 0;
+    } else if (powerLevel === 'disciple') {
+      dots = 1 + Math.floor(Math.random()*4);
+    } else if (powerLevel === 'adept') {
+      dots = 2 + Math.floor(Math.random()*8);
+    } else if (powerLevel === 'master') {
+      dots = 4 + Math.floor(Math.random()*7);
+    }
+  let sphereMax = 3;
+  while (dots > 0) {
+    if (Math.max(Object.values(spheres)) < highSphere) {
+      sphereMax = highSphere;
+    } else {
+      sphereMax = otherSphere;
+    }
+    roll = Math.floor(Math.random()*sphereList.length + 1);
+    if (roll < sphereList.length) {
+      const checkSphere = sphereList[roll];
+      if (spheres[checkSphere] < sphereMax) {
+        spheres[checkSphere] += 1;
+        dots -= 1;
+      }
+    } else {
+      roll = Math.floor(Math.random()*zeroSpheres.length);
+      spheres[zeroSpheres[roll]] = 1;
+      dots -= 1;
+      zeroSpheres.splice(roll, 1);
+    }
+  }
+}
+
 function mageCreator() {
     let meritList = document.querySelector(".merits");
     let praxisList = document.querySelector(".praxis");
@@ -1176,6 +1237,7 @@ function mageCreator() {
     let skills = randomSkill(powerLevel, gnosis);
     addSkills(skills, gnosis, powerLevel);
     let spheres = arcana(powerLevel, path);
+    addArcana (gnosis, powerLevel, spheres);
     let others = calculated(attributes, gnosis, skills);
     let merits = randomMerits(gnosis, faction, skills, attributes, spheres, powerLevel);
     let finalMerits = meritCleanup(merits, skills, others);
