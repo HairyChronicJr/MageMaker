@@ -187,23 +187,6 @@ function randomSkill(level, gnosis) {
     let primary = 11;
     let secondary = 7;
     let tertiary = 4;
-    /*if (level === 'starting') {
-      primary = 11;
-      secondary = 7;
-      tertiary = 4;
-    } else if (level === 'disciple') {
-      primary = 11 + Math.floor(Math.random()*11);
-      secondary = 7 + Math.floor(Math.random()*7);
-      tertiary = 4 + Math.floor(Math.random()*4);
-    } else if (level === 'adept') {
-      primary = 10 + Math.floor(Math.random()*13);
-      secondary = 8 + Math.floor(Math.random()*10);
-      tertiary = 4 + Math.floor(Math.random()*10);
-    } else if (level === 'master') {
-      primary = 10 + Math.floor(Math.random()*17);
-      secondary = 9 + Math.floor(Math.random()*10);
-      tertiary = 4 + Math.floor(Math.random()*10);
-    }*/
     const skillMax = 5 + Math.max(0, gnosis - 5);
     let roll = Math.floor(Math.random()*3);
     if (roll === 0) {
@@ -463,23 +446,12 @@ function calculated (attributes, gnosis, skills){
 
 function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   let merits = {};
-  let meritPoints = 0;
+  let meritPoints = Math.max(0, (15 - ((gnosis) * 5)));
   let roll = 0;
   if (faction != 'Apostate') {
     merits['High Speech'] = 1;
     merits['Order Status('+faction+')'] = 1;
   }
-  if (level === 'starting') {
-    meritPoints = 15 - ((gnosis) * 5);
-  } else if (level === 'disciple') {
-    meritPoints = 10 + Math.round(Math.random()*13);
-  } else if (level === 'adept') {
-    meritPoints = 10 + Math.round(Math.random()*27);
-  } else if (level === 'master') {
-    meritPoints = 15 + Math.floor(Math.random()*22); 
-  }
-  //meritPoints = 3;
-  while (meritPoints > 0) {
   let allMerits = [{name: "Imbued Item", min: 1, max: 10, increment: 1, requirements: true},
   {name:"Enhanced Item", min: 1, max: 10, increment: 1, requirements: true},
   {name:"Adamant Hand(Brawl)", min:2, max:2, increment: 0, requirements:(merits['Order Status(Adamantine Arrow)'] > 0 && skills.brawl > 2)},
@@ -595,9 +567,14 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   {name:"Shiv", min:1, max:2, increment: 1, requirements: (merits['Street Fighting'] > 1 && skills.weaponry > 0)},
   {name:"Street Fighting", min:1, max:5, increment: 1, requirements: (attributes.stamina > 2 && attributes.composure > 2 && skills.brawl > 1 && skills.streetwise > 1)},
   {name:"Unarmed Defense", min:1, max:5, increment: 1, requirements: (attributes.dexterity > 2 && skills.brawl > 1 && merits['Defensive Combat'] > 0)}]
+while (meritPoints > 0) {
+  for (const merit in allMerits) {
+    if (merit.requirements) {
+      merit.requirements = true;
+    }
+  }
   roll = Math.floor(Math.random()*allMerits.length);
     check = allMerits[roll]
-    //alert(check.name);
     if (merits[check.name]) {
       if (meritPoints >= check.increment) {
         if (merits[check.name] < (check.max - check.increment)) {
@@ -609,6 +586,48 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
       if (meritPoints >= (check.min)) {
         merits[check.name] = check.min;
         meritPoints -= check.min;
+      }
+    }
+  }
+  let currentMerits = [];
+  if (level === 'starting') {
+    meritPoints = 0;
+  } else if (level === 'disciple') {
+    meritPoints = 10 + Math.floor(Math.random()*13);
+  } else if (level === 'adept') {
+    meritPoints = 10 + Math.floor(Math.random()*27);
+  } else if (level === 'master') {
+    meritPoints = 15 + Math.floor(Math.random()*22); 
+  }
+  for (const merit in merits) {
+    currentMerits.push(merit);
+  }
+  while (meritPoints > 0) {
+    //console.log('Current merits: ' + currentMerits);
+    let meritInfo = {};
+    roll = Math.floor(Math.random() * currentMerits.length + 1);
+    if (roll < currentMerits.length) {
+      const check = currentMerits[roll];
+      //console.log('Existing merit: ' + check);
+      for (const merit of allMerits) {
+        if (merit.name === check) {
+          meritInfo = merit;
+          //console.log('Merit info found.');
+        }
+      }
+      if (merits[check] <= (meritInfo.max - meritInfo.increment)) {
+        merits[check] += meritInfo.increment;
+        meritPoints -= meritInfo.increment;
+      }
+    } else {
+      roll = Math.floor(Math.random()*allMerits.length);
+      check = allMerits[roll]
+      if (!merits[check.name] && check.requirements) {
+        if (meritPoints >= (check.min)) {
+          merits[check.name] = check.min;
+          meritPoints -= check.min;
+          currentMerits.push(check.name);
+        }
       }
     }
   }
