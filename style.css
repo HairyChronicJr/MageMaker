@@ -79,6 +79,6 @@ ul {
   width: 100%;
 }
 
-table.merits th, table.praxis th, table.rotes th {
+th {
   text-align: center;
 }

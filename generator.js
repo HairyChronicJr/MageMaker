@@ -568,7 +568,7 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   {name:"Street Fighting", min:1, max:5, increment: 1, requirements: (attributes.stamina > 2 && attributes.composure > 2 && skills.brawl > 1 && skills.streetwise > 1)},
   {name:"Unarmed Defense", min:1, max:5, increment: 1, requirements: (attributes.dexterity > 2 && skills.brawl > 1 && merits['Defensive Combat'] > 0)}]
 while (meritPoints > 0) {
-  for (const merit in allMerits) {
+  for (const merit of allMerits) {
     if (merit.requirements) {
       merit.requirements = true;
     }
@@ -628,6 +628,11 @@ while (meritPoints > 0) {
           meritPoints -= check.min;
           currentMerits.push(check.name);
         }
+      for (const merit of allMerits) {
+        if (merit.requirements) {
+        merit.requirements = true;
+        }
+      }
       }
     }
   }
