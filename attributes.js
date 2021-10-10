@@ -1,7 +1,7 @@
 function randomAttributes(level, gnosis) {
     let attributes = {strength: 0, dexterity: 0, stamina: 0,
         inteligence: 0, wits: 0, resolve: 0, presence: 0, 
-        manipulation: 0., composure: 0};
+        manipulation: 0, composure: 0};
     const attribMax = 5 + Math.max(0, gnosis - 5);
     let primary = 0;
     let secondary = 0;
@@ -23,113 +23,51 @@ function randomAttributes(level, gnosis) {
         secondary = 9 + Math.floor(Math.random()*8);
         tertiary = 7 + Math.floor(Math.random()*6);
     }
-let roll = Math.floor(Math.random()*3);
-if (roll === 0) {
-    let attributeSpread = assignDots(primary, attribMax);
-    //mental primary
-    //console.log('Mental Primary');
-    attributes.inteligence = attributeSpread.power;
-    attributes.wits = attributeSpread.finesse;
-    attributes.resolve = attributeSpread.resistance;
+  let roll = Math.floor(Math.random()*3);
+  if (roll === 0) {
+    console.log('Before assign:', attributes);
+    assignMentalAttribs(primary, attribMax, attributes);
+    console.log('Primary mental:', attributes);
     roll = Math.floor(Math.random()*2);
     if (roll === 0) {
-        //physical secondary
-        attributeSpread = assignDots(secondary, attribMax);
-        attributes.strength = attributeSpread.power;
-        attributes.dexterity = attributeSpread.finesse;
-        attributes.stamina = attributeSpread.resistance;
-        //social tertiary
-        attributeSpread = assignDots(tertiary, attribMax);
-        attributes.presence = attributeSpread.power;
-        attributes.manipulation = attributeSpread.finesse;
-        attributes.composure = attributeSpread.resistance;
+        assignPhysicalAttribs(secondary, attribMax, attributes);
+        assignSocialAttribs(tertiary, attribMax, attributes);
     } else {
-        //social secondary
-        attributeSpread = assignDots(secondary, attribMax);
-        attributes.presence = attributeSpread.power;
-        attributes.manipulation = attributeSpread.finesse;
-        attributes.composure = attributeSpread.resistance;
-        //physical tertiary
-        attributeSpread = assignDots(tertiary, attribMax);
-        attributes.strength = attributeSpread.power;
-        attributes.dexterity = attributeSpread.finesse;
-        attributes.stamina = attributeSpread.resistance;
+        assignSocialAttribs(secondary, attribMax, attributes);
+        assignPhysicalAttribs(tertiary, attribMax, attributes);
     }
-} else if (roll === 1) {
-        //physical primary
-        //console.log('Physical Primary');
-        attributeSpread = assignDots(primary, attribMax);
-        attributes.strength = attributeSpread.power;
-        attributes.dexterity = attributeSpread.finesse;
-        attributes.stamina = attributeSpread.resistance;
-        roll = Math.floor(Math.random()*2);
-        if (roll === 0) {
-            //mental secondary
-            attributeSpread = assignDots(secondary, attribMax);
-            attributes.inteligence = attributeSpread.power;
-            attributes.wits = attributeSpread.finesse;
-            attributes.resolve = attributeSpread.resistance;
-            //social tertiary
-            attributeSpread = assignDots(tertiary, attribMax);
-            attributes.presence = attributeSpread.power;
-            attributes.manipulation = attributeSpread.finesse;
-            attributes.composure = attributeSpread.resistance;
-        } else {
-            //social secondary
-            attributeSpread = assignDots(secondary, attribMax);
-            attributes.presence = attributeSpread.power;
-            attributes.manipulation = attributeSpread.finesse;
-            attributes.composure = attributeSpread.resistance;
-            //mental tertiary
-            attributeSpread = assignDots(tertiary, attribMax);
-            attributes.inteligence = attributeSpread.power;
-            attributes.wits = attributeSpread.finesse;
-            attributes.resolve = attributeSpread.resistance;
-        }
-} else {
-    //social primary
-    //console.log('Social Primary');
-    attributeSpread = assignDots(primary, attribMax);
-    attributes.presence = attributeSpread.power;
-    attributes.manipulation = attributeSpread.finesse;
-    attributes.composure = attributeSpread.resistance;
+  } else if (roll === 1) {
+    assignPhysicalAttribs(primary, attribMax, attributes);
     roll = Math.floor(Math.random()*2);
     if (roll === 0) {
-        //mental secondary
-        //console.log('Mental Secondary');
-        attributeSpread = assignDots(secondary, attribMax);
-        attributes.inteligence = attributeSpread.power;
-        attributes.wits = attributeSpread.finesse;
-        attributes.resolve = attributeSpread.resistance;
-        //physical tertiary
-        attributeSpread = assignDots(tertiary, attribMax);
-        attributes.strength = attributeSpread.power;
-        attributes.dexterity = attributeSpread.finesse;
-        attributes.stamina = attributeSpread.resistance;
+      assignMentalAttribs(secondary, attribMax, attributes);
+      assignSocialAttribs(tertiary, attribMax, attributes);
     } else {
-        //physical secondary
-        //console.log('Physical Secondary');
-        attributeSpread = assignDots(secondary, attribMax);
-        attributes.strength = attributeSpread.power;
-        attributes.dexterity = attributeSpread.finesse;
-        attributes.stamina = attributeSpread.resistance;
-        //mental tertiary
-        attributeSpread = assignDots(tertiary, attribMax);
-        attributes.inteligence = attributeSpread.power;
-        attributes.wits = attributeSpread.finesse;
-        attributes.resolve = attributeSpread.resistance;
+      assignSocialAttribs(secondary, attribMax, attributes);
+      assignMentalAttribs(tertiary, attribMax, attributes);
+    } 
+  } else {
+    assignSocialAttribs(primary, attribMax, attributes);
+    roll = Math.floor(Math.random()*2);
+    if (roll === 0) {
+      assignMentalAttribs(secondary, attribMax, attributes);
+      assignPhysicalAttribs(tertiary, attribMax, attributes);
+    } else {
+      assignPhysicalAttribs(secondary, attribMax, attributes);
+      assignMentalAttribs(tertiary, attribMax, attributes);
+      }
     }
-}
-let attributeKeys = Object.keys(attributes);
-let points = 1;
-while (points > 0) {
-    roll = Math.floor(Math.random()*3);
-    if (attributes[attributeKeys[roll*3]] < attribMax) {
+  let attributeKeys = Object.keys(attributes);
+  let points = 1;
+  while (points > 0) {
+      roll = Math.floor(Math.random()*3);
+      if (attributes[attributeKeys[roll*3]] < attribMax) {
         attributes[attributeKeys[roll*3]] += 1;
         points -= 1
-    }
-}
-return attributes;
+      }
+  }
+  console.log(attributes);
+  return attributes;
 }
 
 function assignDots (points, attribMax) {
@@ -145,22 +83,25 @@ function assignDots (points, attribMax) {
     return attributes;
 }
 
-function assignMental (points, attribMax) {
-  attributeSpread = assignDots(points, attribMax);
+function assignMentalAttribs(points, attribMax, attributes) {
+  console.log('Mental points:', points);
+  let attributeSpread = assignDots(points, attribMax);
   attributes.inteligence = attributeSpread.power;
   attributes.wits = attributeSpread.finesse;
   attributes.resolve = attributeSpread.resistance;
 }
 
-function assignPhysical (points, attribMax) {
-  attributeSpread = assignDots(points, attribMax);
+function assignPhysicalAttribs(points, attribMax, attributes) {
+  console.log('Physical points:', points);
+  let attributeSpread = assignDots(points, attribMax);
   attributes.strength = attributeSpread.power;
   attributes.dexterity = attributeSpread.finesse;
   attributes.stamina = attributeSpread.resistance;
 }
 
-function assignSocial (points, attribMax) {
-  attributeSpread = assignDots(points, attribMax);
+function assignSocialAttribs(points, attribMax, attributes) {
+  console.log('Social points:', points);
+  let attributeSpread = assignDots(points, attribMax);
   attributes.presence = attributeSpread.power;
   attributes.manipulation = attributeSpread.finesse;
   attributes.composure = attributeSpread.resistance;

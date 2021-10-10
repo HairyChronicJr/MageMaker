@@ -12,6 +12,7 @@
     <br>
     <button name="start" onclick="mageCreator()" class="btn btn-light border-dark my-2">Create your Mage!</button>
     <br>
+    <!-- Form selectors for Path, Order and power level -->
     <section id="selectors">
       <label for='path'>Path</label>
       <select name='path' id = 'path_selection'>
@@ -44,6 +45,7 @@
       </select>
     </section>
     <br>
+    <!-- Basic character information -->
     <div class = 'row'>
     <table class='flex-full table table-borderless p-0'>
         <tr>
@@ -63,6 +65,7 @@
         </tr>
     </table>
     <br>
+    <!-- Attributes -->
     <table class='flex-full table table-borderless'>
         <tr>
             <td>Intelligence: <span id=int></span></td>
@@ -81,6 +84,7 @@
         </tr>
     </table>
     <br>
+    <!-- Skills -->
     <table class='flex-full table table-borderless'>
         <tr>
             <th>Mental</th>
@@ -129,6 +133,7 @@
         </tr>
     </table>
     <br>
+    <!-- Arcana and derived values -->
     <table class="flex-full table table-borderless">
         <tr>
             <th colspan="2">Arcana</th>
@@ -174,6 +179,7 @@
             <td>Initiative: <span id=initiative></span></td>
         </tr>
     </table>
+    <!-- Merits and spells -->
     <table id=praxislist class="praxis table table-borderless">
         </table>
         </div>
@@ -183,6 +189,8 @@
         </table>
         </div>       
 </div>
+<!-- Using multiple scripts since repl.it doesn't currently support modules well -->
+<script src="arcana.js"></script>
 <script src="categories.js"></script>
 <script src='attributes.js'></script>
 <script src='skills.js'></script>
