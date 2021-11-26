@@ -130,6 +130,7 @@ function randomMerits(gnosis, faction, skills, attributes, spheres, level) {
   }
   //check which merits are available based on requirements
 while (meritPoints > 0) {
+  //maybe change to .forEach?
   for (const merit of allMerits) {
     if (merit.requirements) {
       merit.requirements = true;

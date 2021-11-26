@@ -4,11 +4,12 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-  <link href="style.css" type="text/css" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+  <link href="./css/style.css" type="text/css" rel="stylesheet">
   <title>Utahrian's MTAw Random Mage Generator</title>
 </head>
 <body>
-    <img src="MageAwakeningLogo.png" alt="Logo" style="width:300px">
+    <img src="./images/MageAwakeningLogo.png" alt="Logo" class="logo">
     <br>
     <button name="start" onclick="mageCreator()" class="btn btn-light border-dark my-2">Create your Mage!</button>
     <br>
@@ -51,16 +52,16 @@
         <tr>
             <td>Name:</td>
             <td>Concept:</td>
-            <td>Path: <span id=path></span></td>
+            <td>Path: <span id='path'></span></td>
         </tr>
         <tr>
             <td>Player:</td>
-            <td>Virtue: <span id=virtue></span></td>
+            <td>Virtue: <span id='virtue'></span></td>
             <td>Order: <span id='faction'></span></td>
         </tr>
         <tr>
             <td>Chronicle:</td>
-            <td>Vice: <span id=vice></span></td>
+            <td>Vice: <span id='vice'></span></td>
             <td>Cabal:</td>
         </tr>
     </table>
@@ -68,19 +69,19 @@
     <!-- Attributes -->
     <table class='flex-full table table-borderless'>
         <tr>
-            <td>Intelligence: <span id=int></span></td>
-            <td>Strength: <span id=str></span></td>
-            <td>Presence: <span id=pres></span></td>
+            <td>Intelligence: <span id='int'></span></td>
+            <td>Strength: <span id='str'></span></td>
+            <td>Presence: <span id='pres'></span></td>
         </tr>
         <tr>
-            <td>Wits: <span id=wits></span></td>
-            <td>Dexterity: <span id=dex></span></td>
-            <td>Manipulation: <span id=manip></span></td>
+            <td>Wits: <span id='wits'></span></td>
+            <td>Dexterity: <span id='dex'></span></td>
+            <td>Manipulation: <span id='manip'></span></td>
         </tr>
         <tr>
-            <td>Resolve: <span id=res></span></td>
-            <td>Stamina: <span id=sta></span></td>
-            <td>Composure: <span id=comp></span></td>
+            <td>Resolve: <span id='res'></span></td>
+            <td>Stamina: <span id='sta'></span></td>
+            <td>Composure: <span id='comp'></span></td>
         </tr>
     </table>
     <br>
@@ -92,44 +93,44 @@
             <th>Social</th>
         </tr>
         <tr>
-            <td>Academics: <span id=aca></span></td>
-            <td>Athletics: <span id=ath></span></td>
-            <td>Animal Ken: <span id=ani></span></td>
+            <td>Academics: <span id='aca'></span></td>
+            <td>Athletics: <span id='ath'></span></td>
+            <td>Animal Ken: <span id='ani'></span></td>
         </tr>
         <tr>
-            <td>Computer: <span id=com></span></td>
-            <td>Brawl: <span id=bra></span></td>
-            <td>Empathy: <span id=emp></span></td>
+            <td>Computer: <span id='com'></span></td>
+            <td>Brawl: <span id='bra'></span></td>
+            <td>Empathy: <span id='emp'></span></td>
         </tr>
         <tr>
-            <td>Crafts: <span id=cra></span></td>
-            <td>Drive: <span id=dri></span></td>
-            <td>Expression: <span id=exp></span></td>
+            <td>Crafts: <span id='cra'></span></td>
+            <td>Drive: <span id='dri'></span></td>
+            <td>Expression: <span id='exp'></span></td>
         </tr>
         <tr>
-            <td>Investigation: <span id=inv></span></td>
-            <td>Firearms: <span id=fir></span></td>
-            <td>Intimidation: <span id=intim></span></td>
+            <td>Investigation: <span id='inv'></span></td>
+            <td>Firearms: <span id='fir'></span></td>
+            <td>Intimidation: <span id='intim'></span></td>
         </tr>
         <tr>
-            <td>Medicine: <span id=med></span></td>
-            <td>Larceny: <span id=lar></span></td>
-            <td>Persuasion: <span id=per></span></td>
+            <td>Medicine: <span id='med'></span></td>
+            <td>Larceny: <span id='lar'></span></td>
+            <td>Persuasion: <span id='per'></span></td>
         </tr>
         <tr>
-            <td>Occult: <span id=occ></span></td>
-            <td>Stealth: <span id=ste></span></td>
-            <td>Socialize: <span id=soc></span></td>
+            <td>Occult: <span id='occ'></span></td>
+            <td>Stealth: <span id='ste'></span></td>
+            <td>Socialize: <span id='soc'></span></td>
         </tr>
         <tr>
-            <td>Politics: <span id=pol></span></td>
-            <td>Survival: <span id=sur></span></td>
-            <td>Streetwise: <span id=street></span></td>
+            <td>Politics: <span id='pol'></span></td>
+            <td>Survival: <span id='sur'></span></td>
+            <td>Streetwise: <span id='street'></span></td>
         </tr>
         <tr>
-            <td>Science: <span id=sci></span></td>
-            <td>Weaponry: <span id=wea></span></td>
-            <td>Subterfuge: <span id=sub></span></td>
+            <td>Science: <span id='sci'></span></td>
+            <td>Weaponry: <span id='wea'></span></td>
+            <td>Subterfuge: <span id='sub'></span></td>
         </tr>
     </table>
     <br>
@@ -139,66 +140,66 @@
             <th colspan="2">Arcana</th>
         </tr>
         <tr>
-            <td>Death: <span id=death></span></td>
-            <td>Mind: <span id=mind></span></td>
-            <td>Gnosis: <span id=gnosis></span></td>
+            <td>Death: <span id='death'></span></td>
+            <td>Mind: <span id='mind'></span></td>
+            <td>Gnosis: <span id='gnosis'></span></td>
         </tr>
         <tr>
-            <td>Fate: <span id=fate></span></td>
-            <td>Prime: <span id=prime></span></td>
-            <td>Mana: <span id=mana></span></td>
+            <td>Fate: <span id='fate'></span></td>
+            <td>Prime: <span id='prime'></span></td>
+            <td>Mana: <span id='mana'></span></td>
         </tr>
         <tr>
-            <td>Forces: <span id=forces></span></td>
-            <td>Space: <span id=space></span></td>
-            <td>Wisdom: <span id=wisdom></span></td>
+            <td>Forces: <span id='forces'></span></td>
+            <td>Space: <span id='space'></span></td>
+            <td>Wisdom: <span id='wisdom'></span></td>
         </tr>
         <tr>
-            <td>Life: <span id=life></span></td>
-            <td>Spirit: <span id=spirit></span></td>
-            <td>Health: <span id=health></span></td>
+            <td>Life: <span id='life'></span></td>
+            <td>Spirit: <span id='spirit'></span></td>
+            <td>Health: <span id='health'></span></td>
         </tr>
-            <td>Matter: <span id=matter></span></td>
-            <td>Time: <span id=time></span></td>
-            <td>Willpower: <span id=willpower></span></td>
+            <td>Matter: <span id='matter'></span></td>
+            <td>Time: <span id='time'></span></td>
+            <td>Willpower: <span id='willpower'></span></td>
     </table>
     <br>
     <div class = "flex-three">
       <div class = "flex-left">
     <table id ="others" class="table table-borderless mb-0 me-0">
         <tr>
-            <td>Size: <span id=size></span>  </td>
+            <td>Size: <span id='size'></span>  </td>
         </tr>
         <tr>
-            <td>Speed: <span id=speed></span></td>
+            <td>Speed: <span id='speed'></span></td>
         </tr>
         <tr>
-            <td>Defense: <span id=defense></span></td>
+            <td>Defense: <span id='defense'></span></td>
         </tr>
         <tr>
-            <td>Initiative: <span id=initiative></span></td>
+            <td>Initiative: <span id='initiative'></span></td>
         </tr>
     </table>
     <!-- Merits and spells -->
-    <table id=praxislist class="praxis table table-borderless">
+    <table id='praxislist' class="praxis table table-borderless">
         </table>
         </div>
-        <table id=meritlist class="merits table table-borderless">
+        <table id='meritlist' class="merits table table-borderless">
         </table>
-        <table id=rotelist class="rotes table table-borderless">
+        <table id='rotelist' class="rotes table table-borderless">
         </table>
         </div>       
 </div>
 <!-- Using multiple scripts since repl.it doesn't currently support modules well -->
-<script src="gnosis.js"></script>
-<script src="arcana.js"></script>
-<script src="categories.js"></script>
-<script src='attributes.js'></script>
-<script src='skills.js'></script>
-<script src='calculated.js'></script>
-<script src='spells.js'></script>
-<script src='merits.js'></script>
-<script src="generator.js"></script>
+<script src="./js/gnosis.js"></script>
+<script src="./js/arcana.js"></script>
+<script src="./js/categories.js"></script>
+<script src='./js/attributes.js'></script>
+<script src='./js/skills.js'></script>
+<script src='./js/calculated.js'></script>
+<script src='./js/spells.js'></script>
+<script src='./js/merits.js'></script>
+<script src="./js/generator.js"></script>
 </body>
 
 </html>

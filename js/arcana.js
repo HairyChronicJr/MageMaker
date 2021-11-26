@@ -28,7 +28,7 @@ function arcana(powerLevel, path) {
     return arcanum;
 }
 
-//Add extra arcan dots for higher level characters
+//Add extra arcana dots for higher level characters
 function addArcana (gnosis, powerLevel, spheres) {
   //Initialize starting values
   let highSphere = 0;
